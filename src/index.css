@@ -1,0 +1,233 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+/*
+* tailwind theming
+* - extending https://tailwindcss.com/docs/theme#extending-the-default-theme
+* - overriding https://tailwindcss.com/docs/theme#overriding-the-default-theme
+* - referencing css variables https://tailwindcss.com/docs/theme#referencing-other-variables
+* - defining "font-feature-settings"
+*   - https://tailwindcss.com/docs/font-family#customizing-your-theme
+*   - https://github.com/tailwindlabs/tailwindcss/pull/9039/files
+*/
+@theme {
+  /*
+  * System Fonts
+  * - https://tailwindcss.com/docs/font-family
+  * - https://github.com/tmcw/systemfontstack/issues/25
+  * - https://systemfontstack.com/
+  * - Mac and Windows fallback fonts
+  * - case-insensitive https://stackoverflow.com/a/9732401
+  * - spaces without quotes is okay
+  *   - https://stackoverflow.com/a/63651339
+  *   - https://stackoverflow.com/a/7638833
+  *   - https://stackoverflow.com/a/13752149
+  */
+  --font-system-sans:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    Avenir Next,
+    Avenir,
+    Segoe UI,
+    Helvetica Neue,
+    Cantarell,
+    Ubuntu,
+    Roboto,
+    Noto,
+    Helvetica,
+    Arial,
+    Verdana,
+    Trebuchet MS,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol,
+    Noto Color Emoji,
+    emoji;
+
+  --font-system-sans--font-feature-settings:
+    "abvm" 1,
+    "blwm" 1,
+    "ccmp" 1,
+    "locl" 1,
+    "mark" 1,
+    "mkmk" 1,
+    "rlig" 1,
+    "calt" 1,
+    "clig" 1,
+    "curs" 1,
+    "dist" 1,
+    "kern" 1,
+    "liga" 1,
+    "rclt" 1,
+    "rvrn" 1;
+
+  --font-system-serif:
+    ui-serif,
+    Georgia,
+    Cambria,
+    Times New Roman,
+    Iowan Old Style,
+    Apple Garamond,
+    Baskerville,
+    Droid Serif,
+    Source Serif Pro,
+    Palatino,
+    Palatino Linotype,
+    Times,
+    serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol,
+    Noto Color Emoji,
+    emoji;
+
+  --font-system-serif--font-feature-settings:
+    "abvm" 1,
+    "blwm" 1,
+    "ccmp" 1,
+    "locl" 1,
+    "mark" 1,
+    "mkmk" 1,
+    "rlig" 1,
+    "calt" 1,
+    "clig" 1,
+    "curs" 1,
+    "dist" 1,
+    "kern" 1,
+    "liga" 1,
+    "rclt" 1,
+    "rvrn" 1;
+
+  --font-system-mono:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    Liberation Mono,
+    Courier New,
+    Lucida Console,
+    Courier,
+    monospace,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol,
+    Noto Color Emoji,
+    emoji;
+
+  --font-system-mono--font-feature-settings:
+    "abvm" 1,
+    "blwm" 1,
+    "ccmp" 1,
+    "locl" 1,
+    "mark" 1,
+    "mkmk" 1,
+    "rlig" 1,
+    "calt" 1,
+    "clig" 1,
+    "curs" 1,
+    "dist" 1,
+    "kern" 1,
+    "liga" 1,
+    "rclt" 1,
+    "rvrn" 1;
+}
+
+@layer base {
+
+  /*
+  * css-only view transitions
+  * - astro docs https://astro.build/blog/future-of-astro-zero-js-view-transitions/
+  * - browser support https://caniuse.com/mdn-css_at-rules_view-transition
+  */
+  @view-transition {
+    navigation: auto;
+  }
+
+  /*
+  * Root Elements
+  * - nextjs #__next
+  *   - root https://www.codingcrossroads.com/decorating-the-next-js-root-div/
+  *   - selector-id-pattern conflicts with __next, disabled for file
+  * - create-react-app #root
+  *   - root https://stackoverflow.com/a/71668419
+  * - gatsby #___gatsby
+  *   - https://github.com/gatsbyjs/gatsby/issues/26635
+  * - default react #app
+  *   - https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#updates-to-client-rendering-apis
+  * - remix does not have a root
+  */
+
+  /*
+  * Global CSS
+  * - https://tailwindcss.com/docs/preflight
+  * - https://courses.joshwcomeau.com/css-for-js/treasure-trove/010-global-styles
+  */
+
+  html,
+  body,
+  #___gatsby,
+  #__next,
+  #app,
+  #root {
+    @apply h-full;
+  }
+
+  /* prevent horizontal scrolling from triggering history */
+  /* - https://dev.to/danburzo/css-micro-tip-prevent-history-navigation-on-horizontally-scrolling-elements-3iil */
+  /* - https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior#contain */
+  /* - https://stackoverflow.com/a/56071966 */
+  /* - https://stackoverflow.com/a/50846937 */
+  html,
+  body {
+    @apply overscroll-x-contain;
+  }
+
+  /* create root stacking context for portals */
+  #___gatsby,
+  #__next,
+  #app,
+  #root {
+    @apply isolate;
+  }
+
+  body {
+    /*
+    * font smoothing for proper width for light text on dark backgrounds for osx
+    * - https://stackoverflow.com/a/21104871
+    * - https://ui.dev/rwd/articles/font-smoothing
+    * - https://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing/
+    * - https://neetix.neetokb.com/articles/remove-css-font-smoothing-antialiased-to-improve-the-text-contrast
+    */
+    @apply dark:antialiased;
+
+    /* avoid horizontal scroll bars from long words */
+    @apply break-words hyphens-auto;
+    /*
+    * words by distribution
+    * - https://www.researchgate.net/figure/Graph-of-the-frequency-of-distinct-words-by-word-length-Latin-not-shown-due-to-a-large_fig1_229065838
+    * - https://www.reddit.com/r/dataisbeautiful/comments/6jbt4d/a_distribution_of_english_words_by_length_using/
+    *
+    * wrapping text
+    * - https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_text/Wrapping_breaking_text
+    * - https://developer.mozilla.org/en-US/docs/Web/CSS/hyphenate-limit-chars
+    */
+    hyphenate-limit-chars: 14 3 3;
+
+    /* avoid browser synthesizing the bold, italic, small-caps, and/or subscript and superscript typefaces when they are missing in the specified font-family */
+    font-synthesis: none;
+  }
+
+  img,
+  picture,
+  svg,
+  video,
+  canvas,
+  iframe {
+    @apply block max-w-full;
+  }
+}
