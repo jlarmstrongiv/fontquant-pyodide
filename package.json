@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "deploy": "npx netlify deploy --site fontquant --dir dist --prod",
+    "deploy": "npx netlify deploy --no-build --site fontquant --dir dist --prod",
     "lint": "eslint .",
     "preview": "vite preview"
   },
