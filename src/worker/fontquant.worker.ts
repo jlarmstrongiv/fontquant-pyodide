@@ -12,12 +12,12 @@ const customWheels = [
   "beziers-0.6.0-py3-none-any.whl",
   "booleanOperations-0.9.0-py3-none-any.whl",
   "defcon-0.12.1-py3-none-any.whl",
-  "fontparts-0.12.4-py3-none-any.whl",
+  "fontparts-0.12.8-py3-none-any.whl",
   "fontquant-0.0.1-py3-none-any.whl",
   "fs-2.4.16-py2.py3-none-any.whl",
   "kurbopy-0.11.1-cp37-abi3-pyodide_2024_0_wasm32.whl",
   "seaborn-0.13.2-py3-none-any.whl",
-  "uharfbuzz-0.49.1.dev0+ga240603.d20250425-cp312-cp312-pyodide_2024_0_wasm32.whl",
+  "uharfbuzz-0.50.3.dev2+g12a0bed-cp312-cp312-pyodide_2024_0_wasm32.whl",
   "vharfbuzz-0.3.1-py3-none-any.whl",
 ];
 
